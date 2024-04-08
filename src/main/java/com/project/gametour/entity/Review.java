@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,6 +22,7 @@ public class Review {
     private String title;
     private String content;
     private Integer startPoint;
+    private LocalDateTime createDate;
 
     @ManyToOne
     private Game game;
@@ -28,5 +30,6 @@ public class Review {
     @ManyToOne
     private User user;
 
-    private LocalDateTime createDate;
+    @ManyToMany
+    private Set<User> liker;
 }

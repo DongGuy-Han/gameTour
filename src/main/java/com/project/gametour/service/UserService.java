@@ -7,23 +7,27 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @RequiredArgsConstructor
 @Service
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public User create(UserDto userDto) {
-        User user = User.builder()
-                .username(userDto.getUsername())
-                .password(passwordEncoder.encode(userDto.getPassword()))
-                .name(userDto.getName())
-                .email(userDto.getEmail())
-                .role("user")
-                .createDate(LocalDateTime.now())
-                .build();
-        return userRepository.save(user);
+    public UserDto create(UserDto userDto) {
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+
+        User user = UserDto.toEntity(userDto);
+
+        User created = userRepository.save(user);
+
+        return UserDto.toDto(created);
+    }
+
+    public UserDto search(Long id) {
+        User searched = userRepository.findById(id).orElse(null);
+
+        return (searched != null) ?
+                UserDto.toDto(searched) :
+                null;
     }
 }

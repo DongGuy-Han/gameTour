@@ -1,29 +1,32 @@
 package com.project.gametour.dto;
 
+import com.project.gametour.entity.Review;
 import com.project.gametour.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
 @Getter
+@Setter
 public class UserDto {
     private String username;
     private String password;
     private String name;
     private String email;
+    private List<Review> reviewList;
 
-    // builder로 대체가 되는 것 같다.
-    /*public static User toEntity(UserDto userDto) {
+    public static User toEntity(UserDto userDto) {
         return User.builder()
                 .username(userDto.getUsername())
                 .password(userDto.getPassword())
                 .name(userDto.getName())
                 .email(userDto.getEmail())
-                .phoneNumber(userDto.getPhoneNumber())
                 .role("admin")
                 .createDate(LocalDateTime.now())
                 .build();
@@ -35,7 +38,7 @@ public class UserDto {
                 .password(user.getPassword())
                 .name(user.getName())
                 .email(user.getEmail())
-                .phoneNumber(user.getPhoneNumber())
+                .reviewList(user.getReviewList())
                 .build();
-    }*/
+    }
 }
