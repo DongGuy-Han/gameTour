@@ -1,6 +1,7 @@
 package com.project.gametour.service;
 
-import com.project.gametour.dto.UserDto;
+import com.project.gametour.dto.UserRequestDto;
+import com.project.gametour.dto.UserResponseDto;
 import com.project.gametour.entity.User;
 import com.project.gametour.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,21 +14,35 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserDto create(UserDto userDto) {
-        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+    public UserResponseDto create(UserRequestDto userRequestDto) {
+        userRequestDto.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
 
-        User user = UserDto.toEntity(userDto);
+        User user = UserRequestDto.toEntity(userRequestDto);
 
         User created = userRepository.save(user);
 
-        return UserDto.toDto(created);
+        return UserResponseDto.toDto(created);
     }
 
-    public UserDto search(Long id) {
+    public UserResponseDto show(Long id) {
         User searched = userRepository.findById(id).orElse(null);
 
         return (searched != null) ?
-                UserDto.toDto(searched) :
+                UserResponseDto.toDto(searched) :
                 null;
+    }
+
+    public UserResponseDto update(Long id, UserRequestDto userRequestDto) {
+        User user = UserRequestDto.toEntity(userRequestDto);
+
+        User target = userRepository.findById(id).orElse(null);
+
+        if (target == null) {
+            return null;
+        }
+
+        target.modifyName(user);
+        User updated = userRepository.save(target);
+        return UserResponseDto.toDto(updated);
     }
 }

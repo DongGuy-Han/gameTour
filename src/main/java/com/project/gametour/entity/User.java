@@ -24,7 +24,6 @@ public class User {
     private String username;
     private String password;
     private String name;
-    private String email;
     private String role;
     private LocalDateTime createDate;
 
@@ -33,4 +32,12 @@ public class User {
 
     private String providerId;
     private String provider;
+
+    public void modifyName(User user) {
+        if(user.getName() != null) {
+            this.name = user.getName();
+        }
+    }
+
+
 }

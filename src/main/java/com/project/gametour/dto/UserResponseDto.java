@@ -1,0 +1,28 @@
+package com.project.gametour.dto;
+
+import com.project.gametour.entity.Review;
+import com.project.gametour.entity.User;
+import com.project.gametour.role.UserRole;
+import lombok.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Builder
+@AllArgsConstructor
+@ToString
+@Getter
+@Setter
+public class UserResponseDto {
+    private String username;
+    private String name;
+    private List<Review> reviewList;
+
+    public static UserResponseDto toDto(User user) {
+        return UserResponseDto.builder()
+                .username(user.getUsername())
+                .name(user.getName())
+                .reviewList(user.getReviewList())
+                .build();
+    }
+}

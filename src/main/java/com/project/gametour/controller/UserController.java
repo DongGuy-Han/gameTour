@@ -1,6 +1,7 @@
 package com.project.gametour.controller;
 
-import com.project.gametour.dto.UserDto;
+import com.project.gametour.dto.UserRequestDto;
+import com.project.gametour.dto.UserResponseDto;
 import com.project.gametour.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,8 +14,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/users")
-    public ResponseEntity<UserDto> create(@RequestBody UserDto userDto) {
-        UserDto created = userService.create(userDto);
+    public ResponseEntity<UserResponseDto> create(@RequestBody UserRequestDto userRequestDto) {
+        UserResponseDto created = userService.create(userRequestDto);
 
         return (created != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(created) :
@@ -22,11 +23,20 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<UserDto> search(@PathVariable Long id) {
-        UserDto searched = userService.search(id);
+    public ResponseEntity<UserResponseDto> show(@PathVariable Long id) {
+        UserResponseDto searched = userService.show(id);
 
         return (searched != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(searched) :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @PatchMapping("/users/{id}")
+    public ResponseEntity<UserResponseDto> update(@PathVariable Long id, @RequestBody UserRequestDto userRequestDto) {
+        UserResponseDto updated = userService.update(id, userRequestDto);
+
+        return (updated != null) ?
+                ResponseEntity.status(HttpStatus.OK).body(updated) :
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }

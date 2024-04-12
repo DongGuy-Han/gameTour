@@ -56,10 +56,9 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
         if (user == null) {
             user = User.builder()
-                    .username(email)
+                    .username(providerId + "_" + username)
                     .password(password)
                     .name(username)
-                    .email(email)
                     .role(role)
                     .createDate(LocalDateTime.now())
                     .providerId(providerId)
