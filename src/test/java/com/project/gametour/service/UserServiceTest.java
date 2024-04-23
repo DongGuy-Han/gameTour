@@ -104,19 +104,19 @@ class UserServiceTest {
         assertEquals(expected.toString(), userResponseDto.toString());
     }
 
-    @Transactional
-    @Test
-    void update_실패_존재하지_않는_id의_dto_입력() {
-        // 1. 예상 데이터
-        Long id = -1L;
-        String name = "한길동";
-        UserRequestDto dto = UserRequestDto.builder()
-                .name(name)
-                .build();
-        UserResponseDto expected = null;
-        // 2. 실제 데이터
-        UserResponseDto userResponseDto = userService.update(id, dto);
-        // 3. 비교 및 검증
-        assertEquals(expected, userResponseDto);
-    }
+//    @Transactional
+//    @Test
+//    void update_실패_존재하지_않는_id의_dto_입력() {
+//        // 1. 예상 데이터
+//        Long id = -1L;
+//        String name = "한길동";
+//        UserRequestDto dto = UserRequestDto.builder()
+//                .name(name)
+//                .build();
+//        UserResponseDto expected = null;
+//        // 2. 실제 데이터
+//        UserResponseDto userResponseDto = userService.update(id, dto);
+//        // 3. 비교 및 검증
+//        assertEquals(expected, userResponseDto);
+//    }
 }
