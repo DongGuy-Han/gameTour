@@ -15,7 +15,13 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public UserResponseDto create(UserRequestDto userRequestDto) {
+        User existed = userRepository.findByUsername(userRequestDto.getUsername()).orElse(null);
+        if (existed != null) {
+            return null;
+        }
+
         userRequestDto.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
+        userRequestDto.setName(userRequestDto.getUsername());  // default name = username
 
         User user = UserRequestDto.toEntity(userRequestDto);
 
@@ -44,5 +50,16 @@ public class UserService {
         target.modifyName(user);
         User updated = userRepository.save(target);
         return UserResponseDto.toDto(updated);
+    }
+
+    public UserResponseDto delete(Long id) {
+        User target = userRepository.findById(id).orElse(null);
+
+        if (target == null) {
+            return null;
+        }
+
+        userRepository.delete(target);
+        return UserResponseDto.toDto(target);
     }
 }

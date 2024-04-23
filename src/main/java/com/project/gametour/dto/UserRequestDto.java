@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Builder
 @AllArgsConstructor
@@ -15,14 +16,16 @@ import java.time.LocalDateTime;
 @Setter
 public class UserRequestDto {
     private String username;
+    private String name;
     private String password;
 
     public static User toEntity(UserRequestDto userRequestDto) {
         return User.builder()
                 .username(userRequestDto.getUsername())
                 .password(userRequestDto.getPassword())
-                .name(userRequestDto.getUsername())
+                .name(userRequestDto.getName())
                 .role(UserRole.USER.getValue())
+                .reviewList(new ArrayList<>())
                 .createDate(LocalDateTime.now())
                 .build();
     }

@@ -39,4 +39,12 @@ public class UserController {
                 ResponseEntity.status(HttpStatus.OK).body(updated) :
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<UserResponseDto> delete(@PathVariable Long id) {
+        UserResponseDto deleted = userService.delete(id);
+        return (deleted != null) ?
+                ResponseEntity.status(HttpStatus.NO_CONTENT).build() :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
 }
