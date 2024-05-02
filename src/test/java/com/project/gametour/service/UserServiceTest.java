@@ -119,4 +119,33 @@ class UserServiceTest {
         // 3. 비교 및 검증
         assertEquals(expected, userResponseDto);
     }
+
+    @Transactional
+    @Test
+    void delete_성공_존재하는_id_입력() {
+        // 1. 예상 데이터
+        Long id = 1L;
+        UserResponseDto expected = UserResponseDto.builder()
+                .id(id)
+                .username("홍길동")
+                .name("홍길동")
+                .reviewList(new ArrayList<>())
+                .build();
+        // 2. 실제 데이터
+        UserResponseDto userResponseDto = userService.delete(id);
+        // 3. 비교 및 검증
+        assertEquals(expected.toString(), userResponseDto.toString());
+    }
+
+    @Transactional
+    @Test
+    void delete_실패_존재하지_않는_id_입력() {
+        // 1. 예상 데이터
+        Long id = -1L;
+        UserResponseDto expected = null;
+        // 2. 실제 데이터
+        UserResponseDto userResponseDto = userService.delete(id);
+        // 3. 비교 및 검증
+        assertEquals(expected, userResponseDto);
+    }
 }

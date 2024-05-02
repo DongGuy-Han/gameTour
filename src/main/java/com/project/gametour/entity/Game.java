@@ -20,10 +20,11 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String Introduction; // 소개글
-    private String developer;   // 개발사
-    private String distributor; // 배급사
+    private String title;
+    private String description; // 소개글
+    private String studio;   // 개발사
+    private String publisher; // 배급사
+    private String platform;
     private LocalDateTime releaseDate;  // 출시일
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE)
