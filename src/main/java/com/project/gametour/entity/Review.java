@@ -21,7 +21,7 @@ public class Review {
 
     private String title;
     private String content;
-    private Integer startPoint;
+    private Integer starPoint;
     private LocalDateTime createDate;
 
     @ManyToOne
