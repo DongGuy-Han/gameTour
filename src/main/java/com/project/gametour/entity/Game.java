@@ -26,7 +26,18 @@ public class Game {
     private String publisher; // 배급사
     private String platform;
     private LocalDateTime releaseDate;  // 출시일
+    private double starPoint;
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE)
     private List<Review> reviewList;
+
+    public double averageStarPoint() {
+        if (this.reviewList.isEmpty()) return 0;
+        int len = this.reviewList.size();
+        int sum = 0;
+        for (Review review : this.reviewList) {
+            sum += review.getStarPoint();
+        }
+        return (double) sum / len;
+    }
 }

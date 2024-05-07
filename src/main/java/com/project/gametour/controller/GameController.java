@@ -1,5 +1,6 @@
 package com.project.gametour.controller;
 
+import com.project.gametour.dto.UserResponseDto;
 import com.project.gametour.entity.Game;
 import com.project.gametour.service.GameService;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,4 +26,15 @@ public class GameController {
                 ResponseEntity.status(HttpStatus.OK).body(searched) :
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
+    @GetMapping("/games/{id}")
+    public ResponseEntity<Game> show(@PathVariable Long id) {
+        Game searched = gameService.show(id);
+
+        return (searched != null) ?
+                ResponseEntity.status(HttpStatus.OK).body(searched) :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+
 }
