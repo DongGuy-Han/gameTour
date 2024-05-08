@@ -62,4 +62,12 @@ public class UserService {
         userRepository.delete(target);
         return UserResponseDto.toDto(target);
     }
+
+    public User getUser(String username) {
+        User user = this.userRepository.findByUsername(username).orElse(null);
+        if (user != null) {
+            return user;
+        }
+        return user;
+    }
 }

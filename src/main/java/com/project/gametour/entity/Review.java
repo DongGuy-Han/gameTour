@@ -1,10 +1,7 @@
 package com.project.gametour.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -12,6 +9,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Setter
 @Getter
 @Entity
 public class Review {
@@ -21,7 +19,7 @@ public class Review {
 
     private String title;
     private String content;
-    private Integer starPoint;
+    private Double starPoint;
     private LocalDateTime createDate;
 
     @ManyToOne
