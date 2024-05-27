@@ -1,6 +1,5 @@
 package com.project.gametour.config;
 
-import com.project.gametour.config.oauth.PrincipalOauth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

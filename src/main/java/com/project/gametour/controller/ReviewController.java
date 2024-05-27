@@ -24,7 +24,7 @@ public class ReviewController {
     private final GameService gameService;
     private final UserService userService;
 
-    @PostMapping("/reviews/create/{id}")
+    @PostMapping("/reviews/create/{id}") // 리뷰 생성
     public ResponseEntity<Review> create(@RequestBody Review review, @PathVariable Long id, Principal principal) {
         Game game = gameService.show(id);
         User user = userService.getUser(principal.getName());
@@ -36,7 +36,7 @@ public class ReviewController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    @GetMapping("/reviews/list/{id}")
+    @GetMapping("/reviews/list/{id}") // 특정 게임에 대한 리뷰 정보 가져오기
     public ResponseEntity<List<Review>> list(@PathVariable Long id) {
         List<Review> reviewList = reviewService.getReviewList(id);
 
@@ -45,7 +45,7 @@ public class ReviewController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    @PatchMapping("/reviews/modify")
+    @PatchMapping("/reviews/modify") // 특정 리뷰 수정하기
     public ResponseEntity<Review> answerModify(Review review, Principal principal) {
         Review curReview = this.reviewService.getReview(review.getId());
         if (!curReview.getUser().getUsername().equals(principal.getName())) {
@@ -57,7 +57,7 @@ public class ReviewController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    @DeleteMapping("/reviews/delete/{id}")
+    @DeleteMapping("/reviews/delete/{id}") // 특정 리뷰 삭제하기
     public ResponseEntity<UserResponseDto> delete(@PathVariable Long id, Principal principal) {
         Review curReview = this.reviewService.getReview(id);
         if (!curReview.getUser().getUsername().equals(principal.getName())) {

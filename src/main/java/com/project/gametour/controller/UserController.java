@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/users")
+    @PostMapping("/users") // 유저 생성하기
     public ResponseEntity<UserResponseDto> create(@RequestBody UserRequestDto userRequestDto) {
         UserResponseDto created = userService.create(userRequestDto);
 
@@ -22,7 +22,7 @@ public class UserController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/users/{id}") // 특정 유저 정보 가져오기
     public ResponseEntity<UserResponseDto> show(@PathVariable Long id) {
         UserResponseDto searched = userService.show(id);
 
@@ -31,7 +31,7 @@ public class UserController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    @PatchMapping("/users/{id}")
+    @PatchMapping("/users/update/{id}") // 특정 유저 정보 업데이트
     public ResponseEntity<UserResponseDto> update(@PathVariable Long id, @RequestBody UserRequestDto userRequestDto) {
         UserResponseDto updated = userService.update(id, userRequestDto);
 
@@ -40,7 +40,7 @@ public class UserController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/users/delete/{id}") // 특정 유저 삭제
     public ResponseEntity<UserResponseDto> delete(@PathVariable Long id) {
         UserResponseDto deleted = userService.delete(id);
         return (deleted != null) ?
