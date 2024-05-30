@@ -3,10 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px; /* 넓이 조정 */
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .social-login {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px; /* 소셜 로그인 버튼과 입력 폼 사이 간격 조정 */
+        }
+        .social-login a {
+            flex: 1;
+            margin: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+        }
+        .social-login a.google {
+            background-color: #4285F4; /* Google blue */
+        }
+        .social-login a.naver {
+            background-color: #03C75A; /* Naver green */
+        }
+        .social-login a.kakao {
+            background-color: #FEE500; /* Kakao yellow */
+            color: black;
+        }
+    </style>
 </head>
 <body>
-<a href="/oauth2/authorization/google">구글 로그인</a>
-<a href="/oauth2/authorization/naver">네이버 로그인</a>
-<a href="/oauth2/authorization/kakao">카카오 로그인</a>
+<div class="container">
+    <h1>로그인</h1>
+
+    <!-- username과 password 입력 폼 -->
+    <form id="loginForm" method="POST" action="/login">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- 소셜 로그인 링크 -->
+    <div class="social-login">
+        <a href="/oauth2/authorization/google" class="google">구글 로그인</a>
+        <a href="/oauth2/authorization/naver" class="naver">네이버 로그인</a>
+        <a href="/oauth2/authorization/kakao" class="kakao">카카오 로그인</a>
+    </div>
+</div>
 </body>
 </html>

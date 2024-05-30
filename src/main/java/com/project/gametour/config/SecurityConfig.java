@@ -25,13 +25,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests((request) -> request.requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
                 .formLogin((login) -> login
                         .loginPage("/login")
-                        .defaultSuccessUrl("/"))
+                        .defaultSuccessUrl("http://localhost:3000"))
                 .logout((logout) -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/")
                         .invalidateHttpSession(true))
                 .oauth2Login((oauth) -> oauth
                         .loginPage("/login")
+                        .defaultSuccessUrl("http://localhost:3000")
                         .userInfoEndpoint((userInfoEndpointConfig -> userInfoEndpointConfig
                                 .userService(principalOauth2UserService))));
         return http.build();

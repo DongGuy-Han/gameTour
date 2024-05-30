@@ -1,6 +1,5 @@
 package com.project.gametour.controller;
 
-import com.project.gametour.dto.UserResponseDto;
 import com.project.gametour.entity.Game;
 import com.project.gametour.service.GameService;
 import lombok.RequiredArgsConstructor;
@@ -36,5 +35,9 @@ public class GameController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
+    @GetMapping("/api/hello")
+    public String hello() {
+        return "hello";
+    }
 
 }

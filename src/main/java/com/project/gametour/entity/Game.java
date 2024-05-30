@@ -19,11 +19,13 @@ public class Game {
     private Long id;
 
     private String title;
+    private String thumb;
     private String description; // 소개글
     private String studio;   // 개발사
     private String publisher; // 배급사
     private String platform;
     private LocalDateTime releaseDate;  // 출시일
+    private String tag;
     private double starPoint;
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE)
